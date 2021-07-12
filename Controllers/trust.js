@@ -27,6 +27,12 @@ exports.signUp =(req, res) => {
             return res.status(400).json({email: "Email already exist!!!"})
         }
     });
+	
+	trust.findOne({ userName: req.body.userName }).then(returnedStuff => {
+        if(returnedStuff) {
+            return res.status(400).json({username: "Username already exist!!!"})
+        }
+    });
 
     // saving user with request information to database
 	const {trustProof_id, firstName, lastName, department,email,phoneNumber,designation, userName, selectedFile,password } = req.body;
