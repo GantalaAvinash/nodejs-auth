@@ -25,6 +25,11 @@ exports.signUp =(req, res) => {
             return res.status(400).json({email: "Email already exist!!!"})
         }
     });
+	User.findOne({ userName: req.body.userName }).then(returnedStuff => {
+        if(returnedStuff) {
+            return res.status(400).json({username: "Username already exist!!!"})
+        }
+    });
 
     // saving user with request information to database
 	const { firstName, lastName, phoneNumber, email, userName, password, accntStatus, is_active, selectedFile } = req.body;
